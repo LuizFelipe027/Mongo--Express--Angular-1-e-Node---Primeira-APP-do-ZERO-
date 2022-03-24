@@ -1,0 +1,216 @@
+	
+	> show dbs 				--> Mostra os banco de dados
+		admin   0.000GB
+		config  0.000GB
+		local   0.000GB
+	> use db_finance -- 			--> Posso usar qualquer db disponível e "criar" um novo
+		switched to db db_finance
+	> db -- 				--> mostra o db que estou 
+		db_finance
+	> show dbs				--> Mostra os banco de dados
+		admin   0.000GB
+		config  0.000GB
+		local   0.000GB
+	> db.createCollection('billingCycles')  --> Cria uma nova coleção no db que eu estou
+		{ "ok" : 1 }
+	> show dbs				--> Mostra os banco de dados
+		admin       0.000GB
+		config      0.000GB
+		db_finance  0.000GB
+		local       0.000GB
+	> show collections 			--> Mostra as Coleções do db que eu estou
+		billingCycles
+	> db.createCollection('billingcicles')  --> Cria uma nova coleção no db que eu estou
+		{ "ok" : 1 }
+	> show collections			--> Mostra as Coleções do db que eu estou
+		billingCycles
+		billingcicles
+	> db.billingCycles.drop()		--> Apaga a Coleção selecionada no db
+		true
+	> show collections			--> Mostra as Coleções do db que eu estou
+		billingcicles
+	> db.billingcycles.drop()		--> Apaga a Coleção selecionada no db
+		false
+	> show collections			--> Mostra as Coleções do db que eu estou
+		billingcicles
+	> db.billingcicles.drop()		--> Apaga a Coleção selecionada no db
+		true
+	> show collections			--> Mostra as Coleções do db que eu estou
+	> show dbs					--> Mostra os banco de dados
+		admin   0.000GB
+		config  0.000GB
+		local   0.000GB
+	
+===========================================================================================================================================
+
+	 Mongo - Exercício 02: Inserções
+	
+	db.nomeDaCollection.insert({name:"Março/17",month: 3,year: 2017})
+	OU
+	db.nomeDaCollection.save({"objeto"}) --> Atualiza um registtro que já existe, desde q passe a chave. Mas tbm da pra add um novo objeto.
+	OU
+	db.nomeDaCollection.insert({
+		name:"Março/17",
+		month: 3,
+		year: 2017,
+		credits: [
+				{name:"Salário", value: 5000}
+			],
+		debts: [
+				{name:"Luz", value: 100, status:"PAGO"},
+				{name:"Telefon", value: 100, status:"PENDENTE"}
+			]
+		}) 
+
+================================================================================================================================================================================================================================================================================================
+
+	Mongo - Exercício 03: Consultas
+	
+		> db.billingcycles.find()
+	{ "_id" : ObjectId("623b66c8de010c9c071e4f30"), "name" : "Janeiro/17", "month" : 1, "year" : 2017 }
+	{ "_id" : ObjectId("623b67dede010c9c071e4f31"), "name" : "Janeiro/17", "month" : 1, "year" : 2017 }
+	{ "_id" : ObjectId("623b67f3de010c9c071e4f32") }
+	{ "_id" : ObjectId("623b67f9de010c9c071e4f33") }
+	{ "_id" : ObjectId("623b680bde010c9c071e4f34") }
+	{ "_id" : ObjectId("623b6810de010c9c071e4f35") }
+	{ "_id" : ObjectId("623b6814de010c9c071e4f36") }
+	{ "_id" : ObjectId("623b6840de010c9c071e4f37") }
+	{ "_id" : ObjectId("623b6dc1bc95f650477b2d05"), "name" : "Março/17", "month" : 3, "year" : 2017, "credits" : [ { "name" : "Salário", "value" : 5000 } ], "debts" : [ { "name" : "Luz", "value" : 100, "status" : "PAGO" }, { "name" : "Telefon", "value" : 100, "status" : "PENDENTE" } ] }
+		
+		
+		> db.billingcycles.find().pretty()
+	{
+			"_id" : ObjectId("623b66c8de010c9c071e4f30"),
+			"name" : "Janeiro/17",
+			"month" : 1,
+			"year" : 2017
+	}
+	{
+			"_id" : ObjectId("623b67dede010c9c071e4f31"),
+			"name" : "Janeiro/17",
+			"month" : 1,
+			"year" : 2017
+	}
+	{ "_id" : ObjectId("623b67f3de010c9c071e4f32") }
+	{ "_id" : ObjectId("623b67f9de010c9c071e4f33") }
+	{ "_id" : ObjectId("623b680bde010c9c071e4f34") }
+	{ "_id" : ObjectId("623b6810de010c9c071e4f35") }
+	{ "_id" : ObjectId("623b6814de010c9c071e4f36") }
+	{ "_id" : ObjectId("623b6840de010c9c071e4f37") }
+	{
+			"_id" : ObjectId("623b6dc1bc95f650477b2d05"),
+			"name" : "Março/17",
+			"month" : 3,
+			"year" : 2017,
+			"credits" : [
+					{
+							"name" : "Salário",
+							"value" : 5000
+					}
+			],
+			"debts" : [
+					{
+							"name" : "Luz",
+							"value" : 100,
+							"status" : "PAGO"
+					},
+					{
+							"name" : "Telefon",
+							"value" : 100,
+							"status" : "PENDENTE"
+					}
+			]
+	}
+	
+		
+		
+		> db.billingcycles.findOne({month:1})
+	{
+			"_id" : ObjectId("623b66c8de010c9c071e4f30"),
+			"name" : "Janeiro/17",
+			"month" : 1,
+			"year" : 2017
+	}
+	
+	
+	
+		> db.billingcycles.find({$or: [{month:1}, {month:3}]}).pretty()
+	{
+			"_id" : ObjectId("623b66c8de010c9c071e4f30"),
+			"name" : "Janeiro/17",
+			"month" : 1,
+			"year" : 2017
+	}
+	{
+			"_id" : ObjectId("623b67dede010c9c071e4f31"),
+			"name" : "Janeiro/17",
+			"month" : 1,
+			"year" : 2017
+	}
+	{
+			"_id" : ObjectId("623b6dc1bc95f650477b2d05"),
+			"name" : "Março/17",
+			"month" : 3,
+			"year" : 2017,
+			"credits" : [
+					{
+							"name" : "Salário",
+							"value" : 5000
+					}
+			],
+			"debts" : [
+					{
+							"name" : "Luz",
+							"value" : 100,
+							"status" : "PAGO"
+					},
+					{
+							"name" : "Telefon",
+							"value" : 100,
+							"status" : "PENDENTE"
+					}
+			]
+	}
+	
+	
+	
+		> db.billingcycles.find({year:2017}).skip(1)
+	{ "_id" : ObjectId("623b67dede010c9c071e4f31"), "name" : "Janeiro/17", "month" : 1, "year" : 2017 }
+	{ "_id" : ObjectId("623b6dc1bc95f650477b2d05"), "name" : "Março/17", "month" : 3, "year" : 2017, "credits" : [ { "name" : "Salário", "value" : 5000 } ], "debts" : [ { "name" : "Luz", "value" : 100, "status" : "PAGO" }, { "name" : "Telefon", "value" : 100, "status" : "PENDENTE" } ] }
+	
+	
+	
+		> db.billingcycles.find({year:2017}).skip(1).limit(1)	--> Em uma página se quiser uma paginação so colocar o limite que quero trazer por pagina e o tanto que pula é igual o limite
+=================================================================================================================================================================================================================================================================================================
+
+	Mongo - Exercício 04: Agregação
+	
+	db.billingcyles.aggregate([{
+		$project:{credit:{$sum:"$credits.value"},debt:{$sum:"$debts.value"}},
+		}, {
+		$group:{_id:null,credit:{$sum:"credit"},debt:{$sum:"$debt"}}
+		}])
+		
+		
+==================================================================================================================================================================================================================================================================================================		
+		
+		Mongo - Exercício 05: Atualização
+		
+	> db.billingcycles.update({$and:[{month: 1}, {year:2017}]}, 
+							  {$set:{credits:[{name:"Salário", value:5000}]}}) 			--> Comando para atualizar um dado
+	WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+	
+==================================================================================================================================================================================================================================================================================================
+
+	Mongo - Exercício 06: Contador E Remoções
+	
+		
+	> db.billingcycles.count()
+	9
+	
+	> db.billingcycles.remove({month:3}) 			--> Para remover o que foi passdo no filtro
+	WriteResult({ "nRemoved" : 1 })	
+	
+	> db.dropDatabase() 			--> Apaga a base de Dados que está usando
+	{ "ok" : 1 }
+	
