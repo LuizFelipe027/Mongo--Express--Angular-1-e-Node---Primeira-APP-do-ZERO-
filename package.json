@@ -1,0 +1,19 @@
+{
+  "name": "curso-primeira-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuizFelipe027/Mongo--Express--Angular-1-e-Node---Primeira-APP-do-ZERO-.git"
+  },
+  "author": "LuizFelipeRibeiroPaixão",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuizFelipe027/Mongo--Express--Angular-1-e-Node---Primeira-APP-do-ZERO-/issues"
+  },
+  "homepage": "https://github.com/LuizFelipe027/Mongo--Express--Angular-1-e-Node---Primeira-APP-do-ZERO-#readme"
+}
