@@ -8,4 +8,4 @@ console.log(server1 === server2);
 
 const router1 = express1.Router()
 const router2 = express1.Router()
-console.log(router1 === router2);
+console.log(router1 === router2); //Só testes
