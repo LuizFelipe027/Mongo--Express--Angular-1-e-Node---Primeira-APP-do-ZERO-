@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app='app'> <!--Aqui chama o modulo do  angular-->
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>
+        <script type="text/javascript">
+            angular.module('app', []) //Aqui tbm chamar o angular depois de já ter baixado as dependências-->
+            angular.module('app').controller('MeuController', [
+                '$scope', 
+                function($scope){
+                    $scope.value = 10
+                    $scope.inc = () => {
+                        $scope.value++
+                    }
+                }
+            ])
+        </script>
+        <title>Fundamentos Angular</title>
+    </head>
+    <body ng-controller="MeuController">
+       <h1>{{ value }}</h1>
+       <input ng-model="value" />
+       <button ng-click="inc()">Inc</button>
+    </body>
+</html>
